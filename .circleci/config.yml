@@ -11,6 +11,7 @@ commands:
           when: on_fail
           command: |
             aws cloudformation delete-stack --stack-name udapeople-backend-udapeople
+            aws cloudformation delete-stack --stack-name udapeople-frontend-udapeople
 
 jobs:
   build-frontend:
@@ -137,6 +138,26 @@ jobs:
           paths:
             - project/.circleci/ansible/inventory.txt
       - destroy-environment
+  configure-infrastructure:
+    docker:
+      - image: ansible/ansible
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: [ "d5:c0:5e:72:0d:8c:37:14:fb:84:ad:6b:6e:86:3a:e2" ]
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Install dependencies
+          command: |
+            yum install -y tar gzip
+            sudo apt install awscli
+            sudo apt install ansible
+      - run:
+          name: Configure server
+          command: |
+            ubuntu
+      # Here's where you will add some code to rollback on failure
 
 workflows:
   default:
@@ -153,3 +174,5 @@ workflows:
           requires: [ build-frontend ]
       - deploy-infrastructure:
           requires: [ test-frontend, test-backend, scan-frontend, scan-backend ]
+      - configure-infrastructure:
+          requires: [ deploy-infrastructure ]

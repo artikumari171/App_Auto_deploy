@@ -151,12 +151,19 @@ jobs:
           name: Install dependencies
           command: |
             yum install -y tar gzip
-            sudo apt install awscli
-            sudo apt install ansible
+            apt-get install python2.7
+            pip3 install awscli --upgrade --user
+            pip install awscli
+            sudo apt-get update
+            sudo apt-get install software-properties-common
+            sudo apt-add-repository ppa:ansible/ansible
+            sudo apt-get update
+            sudo apt-get install ansible
       - run:
           name: Configure server
           command: |
-            ubuntu
+            cd .circleci/ansible
+            ansible-playbook -i inventory.txt configure-server.yml
       - destroy-environment
 
 workflows:

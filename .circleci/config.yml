@@ -127,7 +127,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - .circleci/ansible/inventory.txt
+            - Devops_Exercise_4/.circleci/ansible/inventory.txt
       - run: return 1
       - destroy-environment
 

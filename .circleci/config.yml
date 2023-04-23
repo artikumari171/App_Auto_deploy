@@ -109,10 +109,10 @@ jobs:
           name: Ensure back-end infrastructure exists
           command: |
             aws cloudformation deploy \
-            --template-file .circleci/files/backend.yml \
-            --stack-name "udapeople-backend-udapeople" \
-            --parameter-overrides ID="udapeople"  \
-            --tags project=udapeople
+              --template-file .circleci/files/backend.yml \
+              --stack-name "udapeople-backend-udapeople" \
+              --parameter-overrides ID="udapeople"  \
+              --tags project=udapeople
       - run:
           name: Add back-end ip to ansible inventory
           command: |

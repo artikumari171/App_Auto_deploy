@@ -113,7 +113,6 @@ jobs:
             --stack-name "udapeople-backend-udapeople" \
             --parameter-overrides ID="udapeople"  \
             --tags project=udapeople
-            --region us-east-1
       - run:
           name: Add back-end ip to ansible inventory
           command: |

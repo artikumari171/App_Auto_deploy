@@ -152,8 +152,8 @@ jobs:
           command: |
             yum install -y tar gzip
             apt-get install python2.7
-            pip3 install awscli --upgrade --user
-            pip install awscli
+            sudo apt-get update
+            sudo apt-get install awscli
             sudo apt-get update
             sudo apt-get install software-properties-common
             sudo apt-add-repository ppa:ansible/ansible

@@ -123,7 +123,7 @@ jobs:
             aws ec2 describe-instances --filters \
             "Name=tag:Name,Values=backend-udapeople" \
             --query "Reservations[*].Instances[*].[PublicIpAddress]" \
-            --output text > project/.circleci/ansible/inventory.txt
+            --output text > ~/inventory.txt
       - persist_to_workspace:
           root: ~/
           paths:

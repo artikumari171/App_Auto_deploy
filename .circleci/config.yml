@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@3.1
 
 commands:
   destroy-environment:
@@ -143,6 +145,9 @@ jobs:
       - image: ansible/ansible:ubuntu1404
     steps:
       - checkout
+      - aws-cli/setup:
+          profile-name: example
+      - run: echo "Run your code here"
       - add_ssh_keys:
           fingerprints: [ "d5:c0:5e:72:0d:8c:37:14:fb:84:ad:6b:6e:86:3a:e2" ]
       - attach_workspace:
@@ -156,7 +161,7 @@ jobs:
             sudo apt-add-repository -y ppa:ansible/ansible
             sudo apt update -y
             sudo apt install -y curl python-dev git
-            sudo curl "https://bootstrap.pypa.io/get-pip.py" -o "/tmp/get-pip.py"
+            sudo curl "https://bootstrap.pypa.io/pip/2.7/get-pip.py" -o "/tmp/get-pip.py"
             sudo python /tmp/get-pip.py
             sudo pip install --upgrade pip && pip install --upgrade setuptools
             sudo pip install ansible

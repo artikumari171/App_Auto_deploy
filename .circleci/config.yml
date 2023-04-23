@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-  aws-cli: circleci/aws-cli@3.1
 
 commands:
   destroy-environment:
@@ -145,9 +143,6 @@ jobs:
       - image: ansible/ansible:ubuntu1404
     steps:
       - checkout
-      - aws-cli/setup:
-          profile-name: example
-      - run: echo "Run your code here"
       - add_ssh_keys:
           fingerprints: [ "d5:c0:5e:72:0d:8c:37:14:fb:84:ad:6b:6e:86:3a:e2" ]
       - attach_workspace:
@@ -155,11 +150,9 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            sudo apt-get update 
-            sudo apt-get install software-properties-common
-            sudo apt-add-repository ppa:ansible/ansible
-            sudo apt-get update
-            sudo apt-get install ansible
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
       - run:
           name: Configure server
           command: |

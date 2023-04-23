@@ -123,11 +123,11 @@ jobs:
             aws ec2 describe-instances --filters \
             "Name=tag:Name,Values=backend-udapeople" \
             --query "Reservations[*].Instances[*].[PublicIpAddress]" \
-            --output text > ~/inventory.txt
+            --output text > project/.circleci/ansible/inventory.txt
       - persist_to_workspace:
           root: ~/
           paths:
-            - Devops_Exercise_4/.circleci/ansible/inventory.txt
+            - project/.circleci/ansible/inventory.txt
       - run: return 1
       - destroy-environment
 

@@ -140,7 +140,7 @@ jobs:
       - destroy-environment
   configure-infrastructure:
     docker:
-      - image: ansible/ansible
+      - image: ansible/ansible:ubuntu1404
     steps:
       - checkout
       - add_ssh_keys:
